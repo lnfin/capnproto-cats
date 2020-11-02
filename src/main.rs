@@ -5,13 +5,13 @@ mod cats_capnp {
     include!("./schema/cats_capnp.rs");
 }
 
-pub mod CatsInShelter {
-    use crate::cats_capnp::{cat,cats_in_shelter};
+pub mod CatsAtHome {
+    use crate::cats_capnp::{cat,cats_at_home};
     use capnp::serialize_packed;
-    pub fn WriteCatsInShelter() -> ::capnp::Result<()> {
+    pub fn WriteCatsAtHome() -> ::capnp::Result<()> {
         let mut message = ::capnp::message::Builder::new_default();
         {
-            let list_of_cats = message.init_root::<cats_in_shelter::Builder>();
+            let list_of_cats = message.init_root::<cats_at_home::Builder>();
 
             let mut cat = list_of_cats.init_catt(1);
             {
@@ -29,18 +29,12 @@ pub mod CatsInShelter {
     }
         serialize_packed::write_message(&mut ::std::io::stdout(), &message)
     }
+
+
 }
 
 fn main() {
 
-    let args : Vec<String> = ::std::env::args().collect();
-    if args.len() < 2 {
-        println!("usage: $ {} [write || read]", args[0]);
-    } else {
-        match &*args[1] {
-            "write" => CatsInShelter::WriteCatsInShelter().unwrap(),
-            _ => {println!("unrecognized argument") }
-        }
-    }
-    
+    CatsAtHome::WriteCatsAtHome().unwrap();
+
 }

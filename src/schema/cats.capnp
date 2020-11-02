@@ -13,6 +13,6 @@ struct Cat {
 
 }
 
-struct CatsInShelter {
+struct CatsAtHome {
   catt @0 :List(Cat);
 }
