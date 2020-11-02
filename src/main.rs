@@ -5,10 +5,10 @@ mod cats_capnp {
     include!("./schema/cats_capnp.rs");
 }
 
-pub mod CatsAtHome {
+pub mod cats_at_home {
     use crate::cats_capnp::{cat,cats_at_home};
     use capnp::serialize_packed;
-    pub fn WriteCatsAtHome() -> ::capnp::Result<()> {
+    pub fn write_cats_at_home() -> ::capnp::Result<()> {
         let mut message = ::capnp::message::Builder::new_default();
         {
             let list_of_cats = message.init_root::<cats_at_home::Builder>();
@@ -35,6 +35,6 @@ pub mod CatsAtHome {
 
 fn main() {
 
-    CatsAtHome::WriteCatsAtHome().unwrap();
+    cats_at_home::write_cats_at_home().unwrap();
 
 }
